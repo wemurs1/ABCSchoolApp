@@ -1,12 +1,22 @@
+using ABCSchoolApp.Infrastructure;
+using ABCSchoolApp.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using ABCSchoolApp;
-using ABCSchoolApp.Infrastructure;
 
-var builder = WebAssemblyHostBuilder.CreateDefault(args);
-builder.RootComponents.Add<App>("#app");
-builder.RootComponents.Add<HeadOutlet>("head::after");
+namespace ABCSchoolApp
+{
+    public class Program
+    {
+        public static async Task Main(string[] args)
+        {
+            var builder = WebAssemblyHostBuilder.CreateDefault(args);
+            builder.RootComponents.Add<App>("#app");
+            builder.RootComponents.Add<HeadOutlet>("head::after");
 
-builder.Services.AddSingleton(builder.Configuration.GetSection(nameof(ApiSettings)).Get<ApiSettings>()!);
+            builder.Services.AddSingleton(builder.Configuration.GetSection("ApiSettings").Get<ApiSettings>()!);
+            builder.AddClientServices();
 
-await builder.Build().RunAsync();
+            await builder.Build().RunAsync();
+        }
+    }
+}

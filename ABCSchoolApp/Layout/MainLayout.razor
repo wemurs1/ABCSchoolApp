@@ -1,16 +1,52 @@
 ﻿@inherits LayoutComponentBase
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
+<MudThemeProvider />
+<MudPopoverProvider />
+<MudDialogContainer />
+<MudSnackbarProvider />
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+<AuthorizeView>
+    <NotAuthorized>
+        <MudContainer MaxWidth="MaxWidth.Small" Class="d-flex align-center" Style="height: 100vh">
+            <MudPaper Elevation="0" Class="py-4" Style="width: 500px">
+                <MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
+                    @Body
+                </MudContainer>
+            </MudPaper>
+        </MudContainer>
+    </NotAuthorized>
+    <Authorized>
+        <MudLayout>
+            <MudAppBar>
+                <MudText Typo="Typo.h6" Class="ml-2">School App</MudText>
+                <MudIconButton Icon="@Icons.Material.Outlined.Menu" class="ml-2" Color="Color.Inherit"
+                               Edge="Edge.Start" />
+                <MudSpacer />
+                <MudMenu Icon="@Icons.Material.Outlined.Person" Color="Color.Inherit"
+                         TransformOrigin="Origin.BottomLeft" Dense="true" Class="mt-1 ml-4">
+                    <ChildContent>
+                        <MudCard Elevation="0" Square="true" Class="mt-2">
+                            <MudCardHeader>
+                                <CardHeaderAvatar>
+                                    <MudAvatar Color="Color.Secondary">J</MudAvatar>
+                                </CardHeaderAvatar>
+                                <CardHeaderContent>
+                                    <MudText Typo="Typo.body2">Junior Matlou</MudText>
+                                    <MudText Typo="Typo.caption">sample@gmail.com</MudText>
+                                </CardHeaderContent>
+                            </MudCardHeader>
+                        </MudCard>
+                    </ChildContent>
+                </MudMenu>
+            </MudAppBar>
+            <MudDrawer>
+                <NavMenu />
+            </MudDrawer>
+            <MudMainContent>
+                <MudContainer MaxWidth="MaxWidth.False" Class="mt-1">
+                    @Body
+                </MudContainer>
+            </MudMainContent>
+        </MudLayout>
+    </Authorized>
+</AuthorizeView>

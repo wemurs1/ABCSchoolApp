@@ -1,0 +1,26 @@
+﻿@page "/login"
+@layout MainLayout
+@attribute [AllowAnonymous]
+
+<MudStack AlignItems="AlignItems.Center" Spacing="2">
+    <MudText Typo="Typo.h4" Align="Align.Center" GutterBottom="true">Sign&nbsp;In</MudText>
+    <MudText Typo="Typo.body2" Align="Align.Center">Enter your credentials to get started</MudText>
+</MudStack>
+<br />
+<MudForm>
+    <MudGrid>
+        <MudItem xs="12">
+            <MudTextField T="string" Label="Tenant" Variant="Variant.Outlined" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField T="string" Label="Username/Email" Variant="Variant.Outlined" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField T="string" Label="Password" Variant="Variant.Outlined" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudButton Color="Color.Success" Size="Size.Large" Style="width: 100%"
+                       StartIcon="@Icons.Material.Filled.Login" Variant="Variant.Filled">Sign&nbsp;In</MudButton>
+        </MudItem>
+    </MudGrid>
+</MudForm>
