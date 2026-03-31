@@ -1,4 +1,4 @@
 <Solution>
-  <Project Path="ABCSchoolApp.Infrastructure/ABCSchoolApp.Infrastructure.csproj" />
   <Project Path="ABCSchoolApp/ABCSchoolApp.csproj" />
+  <Project Path="App.Infrastructure/App.Infrastructure.csproj" />
 </Solution>
