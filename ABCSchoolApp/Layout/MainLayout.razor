@@ -6,7 +6,7 @@
 <MudSnackbarProvider />
 
 <AuthorizeView>
-    <Authorized>
+    <NotAuthorized>
         <MudContainer MaxWidth="MaxWidth.Small" Class="d-flex align-center" Style="height: 100vh">
             <MudPaper Elevation="0" Class="py-4" Style="width: 500px">
                 <MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
@@ -14,8 +14,8 @@
                 </MudContainer>
             </MudPaper>
         </MudContainer>
-    </Authorized>
-    <NotAuthorized>
+    </NotAuthorized>
+    <Authorized>
         <MudLayout>
             <MudAppBar>
                 <MudText Typo="Typo.h6" Class="ml-2">School App</MudText>
@@ -39,6 +39,14 @@
                     </ChildContent>
                 </MudMenu>
             </MudAppBar>
+            <MudDrawer>
+                <NavMenu />
+            </MudDrawer>
+            <MudMainContent>
+                <MudContainer MaxWidth="MaxWidth.False" Class="mt-1">
+                    @Body
+                </MudContainer>
+            </MudMainContent>
         </MudLayout>
-    </NotAuthorized>
+    </Authorized>
 </AuthorizeView>
