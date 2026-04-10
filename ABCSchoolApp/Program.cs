@@ -1,6 +1,3 @@
-using ABCApp.Infrastructure;
-using ABCApp.Infrastructure.Extensions;
-using ABCSchoolApp;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 

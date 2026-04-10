@@ -1,6 +1,5 @@
-using ABCApp.Infrastructure.Services.Auth;
+using ABCApp.Infrastructure.Services.Implementations.Identity;
 using ABCShared.Library.Constants;
-using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -31,6 +30,7 @@ public static class WasmHostBuilderExtensions
             .AddScoped<ApplicationStateProvider>()
             .AddScoped<AuthenticationStateProvider, ApplicationStateProvider>()
             .AddTransient<AuthenticationHeaderHandler>()
+            .AddScoped<ITokenService, TokenService>()
             .AddScoped(sp => sp
                 .GetRequiredService<IHttpClientFactory>()
                 .CreateClient(_clientName)

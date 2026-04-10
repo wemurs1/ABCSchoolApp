@@ -23,6 +23,9 @@
     <Folder Include="Extensions/" />
     <Folder Include="Services/" />
     <Folder Include="Services/Auth/" />
+    <Folder Include="Services/Auth/Identity/" />
+    <Folder Include="Services/Implementations/" />
+    <Folder Include="Services/Implementations/Identity/" />
   </ItemGroup>
 
 </Project>
