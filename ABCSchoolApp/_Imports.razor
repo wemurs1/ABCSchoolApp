@@ -1,5 +1,7 @@
 ﻿@using ABCSchoolApp
 @using ABCSchoolApp.Layout
+@using ABCSchoolApp.Pages.Auth
+@using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.AspNetCore.Components.Routing
@@ -10,3 +12,5 @@
 @using MudBlazor
 @using System.Net.Http
 @using System.Net.Http.Json
+
+@attribute [Authorize]
