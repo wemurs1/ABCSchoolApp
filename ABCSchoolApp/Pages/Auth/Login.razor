@@ -7,19 +7,22 @@
     <MudText Typo="Typo.body2" Align="Align.Center">Enter your credentials to get started</MudText>
 </MudStack>
 <br />
-<MudForm>
+<MudForm @ref="@_form" Model="@_loginRequest">
     <MudGrid>
         <MudItem xs="12">
-            <MudTextField T="string" Label="Tenant" Variant="Variant.Outlined" />
+            <MudTextField @bind-Value="_loginRequest.Tenant" Label="Tenant" Variant="Variant.Outlined" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField T="string" Label="Username/Email" Variant="Variant.Outlined" />
+            <MudTextField @bind-Value="_loginRequest.Username" Label="Username/Email" Variant="Variant.Outlined" />
         </MudItem>
         <MudItem xs="12">
-            <MudTextField T="string" Label="Password" Variant="Variant.Outlined" />
+            <MudTextField @bind-Value="_loginRequest.Password" Label="Password" Variant="Variant.Outlined"
+                          InputType="@_inputType" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon"
+                          OnAdornmentClick="TogglePasswordVisibility" />
         </MudItem>
         <MudItem xs="12">
-            <MudButton>Sign&nbsp;In</MudButton>
+            <MudButton Color="Color.Success" Variant="Variant.Filled" Size="Size.Large" Style="width: 100%"
+                       StartIcon="@Icons.Material.Filled.Login" OnClick="SubmitAsync">Sign&nbsp;In</MudButton>
         </MudItem>
     </MudGrid>
 </MudForm>
