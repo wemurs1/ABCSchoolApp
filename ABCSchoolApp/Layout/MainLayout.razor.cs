@@ -1,3 +1,5 @@
+using MudBlazor;
+
 namespace ABCSchoolApp.Layout;
 
 public partial class MainLayout
@@ -7,5 +9,24 @@ public partial class MainLayout
     private void ToggleDrawer()
     {
         _drawerOpen = !_drawerOpen;
+    }
+
+    private async Task LogoutDialog()
+    {
+        var parameters = new DialogParameters
+        {
+            { nameof(Logout.Title), "Logout" },
+            { nameof(Logout.ConfirmationMessage), "Are you sure you want to logout?" },
+            { nameof(Logout.ButtonText), "Sign Out" },
+            { nameof(Logout.Color), Color.Success }
+        };
+        var options = new DialogOptions
+        {
+            CloseButton = true,
+            MaxWidth = MaxWidth.ExtraSmall,
+            FullWidth = true,
+            BackdropClick = true
+        };
+        await _dialogService.ShowAsync<Logout>(title: null, parameters: parameters, options: options);
     }
 }

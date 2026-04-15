@@ -20,13 +20,19 @@
         <MudLayout>
             <MudAppBar>
                 <MudText Typo="Typo.h6" Class="ml-2">School App</MudText>
-                <MudIconButton Icon="@Icons.Material.Outlined.Menu" Class="ml-2" Color="Color.Inherit"
-                               Edge="Edge.Start" OnClick="@((e)=>ToggleDrawer())"/>
+                <MudIconButton Icon="@Icons.Material.Outlined.Menu" Class="ml-2" Color="Color.Inherit" Edge="Edge.Start"
+                               OnClick="@((e)=>ToggleDrawer())" />
                 <MudSpacer />
                 <MudMenu Icon="@Icons.Material.Outlined.Person" Color="Color.Inherit"
                          TransformOrigin="Origin.BottomLeft" Dense="true" Class="mt-1 ml-4">
                     <ChildContent>
-                        <CurrentUserCard/>
+                        <CurrentUserCard />
+                        <MudDivider />
+                        <MudList T="string">
+                            <MudListItem OnClick="LogoutDialog" Text="Logout" Icon="@Icons.Material.Filled.Logout">
+
+                            </MudListItem>
+                        </MudList>
                     </ChildContent>
                 </MudMenu>
             </MudAppBar>
