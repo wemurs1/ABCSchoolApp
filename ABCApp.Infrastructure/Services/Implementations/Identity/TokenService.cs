@@ -43,6 +43,15 @@ public class TokenService(
         }
     }
 
+    public async Task<IResponseWrapper> LogoutAsync()
+    {
+        await _localStorageService.RemoveItemAsync(StorageConstants.AuthToken);
+        await _localStorageService.RemoveItemAsync(StorageConstants.RefreshToken);
+        ((ApplicationStateProvider)_authenticationStateProvider).MarkUserAsLoggedOut();
+        _httpClient.DefaultRequestHeaders.Authorization = null;
+        return ResponseWrapper.Success();
+    }
+
     private static void AddTenantHeader(HttpRequestMessage request, string headerName, string headerValue)
     {
         if (string.IsNullOrEmpty(headerValue) || request.Headers.Contains(headerName)) return;
