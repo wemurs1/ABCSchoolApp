@@ -1,7 +1,8 @@
 global using ABCApp.Infrastructure.Constants;
 global using ABCApp.Infrastructure.Extensions;
 global using ABCApp.Infrastructure.Services.Auth;
-global using ABCApp.Infrastructure.Services.Auth.Identity;
+global using ABCApp.Infrastructure.Services.Identity;
+global using ABCShared.Library.Models.Requests.Identity;
 global using ABCShared.Library.Models.Requests.Token;
 global using ABCShared.Library.Models.Responses.Token;
 global using ABCShared.Library.Wrappers;

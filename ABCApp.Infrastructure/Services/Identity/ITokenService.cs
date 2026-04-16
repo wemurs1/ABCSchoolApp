@@ -1,4 +1,4 @@
-namespace ABCApp.Infrastructure.Services.Auth.Identity;
+namespace ABCApp.Infrastructure.Services.Identity;
 
 public interface ITokenService
 {
