@@ -31,6 +31,7 @@ public partial class Profile
         UpdateUserRequest.FirstName = Firstname!;
         UpdateUserRequest.LastName = Lastname!;
         UpdateUserRequest.Id = user.GetUserId()!;
+        UpdateUserRequest.PhoneNumber = user.GetPhoneNumber()!;
         if (Firstname?.Length > 0)
         {
             FirstLetterOfFirstname = Firstname[0];

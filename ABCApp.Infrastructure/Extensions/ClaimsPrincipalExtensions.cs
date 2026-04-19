@@ -29,4 +29,9 @@ public static class ClaimsPrincipalExtensions
     {
         return principal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
     }
+
+    public static string? GetPhoneNumber(this ClaimsPrincipal principal)
+    {
+        return principal.FindFirst(ClaimTypes.MobilePhone)?.Value;
+    }
 }
