@@ -16,4 +16,5 @@ public class TokenEndpoints
 public class UserEndpoints
 {
     public required string Update { get; set; }
+    public required string ResetPassword { get; set; }
 }
