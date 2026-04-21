@@ -1,5 +1,6 @@
 ﻿@using ABCApp.Infrastructure.Services.Auth
 @using ABCApp.Infrastructure.Services.Identity
+@using ABCApp.Infrastructure.Services.Tenancy
 @using ABCSchoolApp
 @using ABCSchoolApp.Components
 @using ABCSchoolApp.Layout
@@ -21,6 +22,7 @@
 @inject ApplicationStateProvider _applicationStateProvider
 @inject IDialogService _dialogService
 @inject ISnackbar _snackbar
+@inject ITenantService _tenantService
 @inject ITokenService _tokenService
 @inject IUserService _userService
 @inject NavigationManager _navigation

@@ -16,4 +16,8 @@
     <ProjectReference Include="../ABCApp.Infrastructure/ABCApp.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages/Tenancy/" />
+  </ItemGroup>
+
 </Project>

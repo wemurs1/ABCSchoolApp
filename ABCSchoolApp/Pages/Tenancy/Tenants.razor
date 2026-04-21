@@ -1,0 +1,35 @@
+﻿@page "/tenants"
+
+<Header OnReturn="ReturnClicked" Title="Tenants" Description="Manage Tenants" />
+
+<MudTable Items="TenantList" Loading="_isLoading" LoadingProgressColor="Color.Info" Elevation="25">
+    <ToolBarContent>
+        <MudFab OnClick="OnBoardNewTenantAsync" StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" IconSize="Size.Medium" Class="mr-2" />
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Tenant</MudTh>
+        <MudTh>Admin Firstname</MudTh>
+        <MudTh>Admin Lastname</MudTh>
+        <MudTh>Email</MudTh>
+        <MudTh>Expiry Date</MudTh>
+        <MudTh>Active</MudTh>
+        <MudTh>Actions</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd>@context.Name</MudTd>
+        <MudTd>@context.FirstName</MudTd>
+        <MudTd>@context.LastName</MudTd>
+        <MudTd>@context.Email</MudTd>
+        <MudTd>@context.ValidUpTo.ToString("dd MMM yyyy HH:mm:ss tt")</MudTd>
+        <MudTd>
+            <MudCheckBox @bind-Value="@context.IsActive" ReadOnly Color="Color.Secondary" />
+        </MudTd>
+        <MudTd>
+            <MudMenu Icon="@Icons.Material.Filled.MoreVert" Size="Size.Small" Color="Color.Secondary"
+                     TransformOrigin="Origin.BottomLeft" AnchorOrigin="Origin.BottomLeft">
+                <MudMenuItem>Upgrade</MudMenuItem>
+                <MudMenuItem>Activate</MudMenuItem>
+            </MudMenu>
+        </MudTd>
+    </RowTemplate>
+</MudTable>

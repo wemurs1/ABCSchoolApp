@@ -49,4 +49,11 @@ public partial class Login
             _inputType = InputType.Text;
         }
     }
+
+    private void FillRootAdminCredentialsDuringDevelopment()
+    {
+        _loginRequest.Tenant = "root";
+        _loginRequest.Username = "admin@abcschool.com";
+        _loginRequest.Password = "P@ssw0rd@123";
+    }
 }
