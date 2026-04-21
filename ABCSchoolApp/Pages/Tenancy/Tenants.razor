@@ -4,7 +4,8 @@
 
 <MudTable Items="TenantList" Loading="_isLoading" LoadingProgressColor="Color.Info" Elevation="25">
     <ToolBarContent>
-        <MudFab OnClick="OnBoardNewTenantAsync" StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" IconSize="Size.Medium" Class="mr-2" />
+        <MudFab OnClick="OnBoardNewTenantAsync" StartIcon="@Icons.Material.Filled.Add" Size="Size.Small"
+                IconSize="Size.Medium" Class="mr-2" />
     </ToolBarContent>
     <HeaderContent>
         <MudTh>Tenant</MudTh>
@@ -32,4 +33,7 @@
             </MudMenu>
         </MudTd>
     </RowTemplate>
+    <PagerContent>
+        <MudTablePager RowsPerPageString="RowsPerPageString" InfoFormat="InfoFormat"/>
+    </PagerContent>
 </MudTable>
