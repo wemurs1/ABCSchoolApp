@@ -3,5 +3,8 @@
     <MudNavLink Match="NavLinkMatch.Prefix" Href="/" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
     <MudNavLink Href="/counter" Icon="@Icons.Material.Filled.Calculate">Counter</MudNavLink>
     <MudNavLink Href="/account" Icon="@Icons.Material.Filled.ManageAccounts">Account</MudNavLink>
-    <MudNavLink Href="/tenants" Icon="@Icons.Material.Filled.School">Tenants</MudNavLink>
+    @if (_canViewTenants)
+    {
+        <MudNavLink Href="/tenants" Icon="@Icons.Material.Filled.School">Tenants</MudNavLink>
+    }
 </MudNavMenu>
