@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Components;
-
 namespace ABCSchoolApp.Components;
 
 public partial class Header

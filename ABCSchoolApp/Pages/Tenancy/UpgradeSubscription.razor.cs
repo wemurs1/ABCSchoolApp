@@ -1,28 +1,26 @@
 namespace ABCSchoolApp.Pages.Tenancy;
 
-public partial class CreateTenant
+public partial class UpgradeSubscription
 {
     [CascadingParameter] private IMudDialogInstance _dialogInstance { get; set; } = default!;
-    private CreateTenantRequest CreateTenantRequest { get; set; } = new()
-    { Identifier = string.Empty, Name = string.Empty, FirstName = string.Empty, LastName = string.Empty, Email = string.Empty };
-    private MudForm _form = default!;
-    private MudDatePicker _datePicker = default!;
+    [Parameter] public UpdateTenantSubscriptionRequest SubscriptionRequest { get; set; } = default!;
 
-    private DateTime? ValidUpToPicker
+    private MudForm _form = default!;
+    private DateTime? NewExpiryDatePicker
     {
-        get => CreateTenantRequest.ValidUpTo == default ? null : CreateTenantRequest.ValidUpTo;
+        get => SubscriptionRequest.NewExpiryDate == default ? null : SubscriptionRequest.NewExpiryDate;
         set
         {
             if (value.HasValue)
             {
-                CreateTenantRequest.ValidUpTo = value.Value;
+                SubscriptionRequest.NewExpiryDate = value.Value;
             }
         }
     }
 
-    private async Task SaveTenantAsync()
+    private async Task UpgradeSubscriptionAsync()
     {
-        var result = await _tenantService.CreateAsync(CreateTenantRequest);
+        var result = await _tenantService.UpgradeSubscriptionAsync(SubscriptionRequest);
         if (result.IsSuccessful)
         {
             _snackbar.Add(result.Messages[0], Severity.Success);
