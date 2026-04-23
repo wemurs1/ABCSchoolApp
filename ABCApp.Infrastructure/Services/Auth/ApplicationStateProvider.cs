@@ -1,6 +1,7 @@
+using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http.Headers;
 using System.Security.Claims;
-using System.Text.Json;
+// using System.Text.Json;
 using Microsoft.AspNetCore.Components.Authorization;
 
 namespace ABCApp.Infrastructure.Services.Auth;
@@ -22,17 +23,9 @@ public class ApplicationStateProvider(ILocalStorageService localStorageService, 
         return state;
     }
 
-    public void MarkUserAsAuthenticated(string username)
+    public void MarkUserAsAuthenticated()
     {
-        var authenticatedUser = new ClaimsPrincipal(
-            new ClaimsIdentity(
-            [
-                new Claim(ClaimTypes.Email, username)
-            ],
-            "apiauth")
-        );
-        var authState = Task.FromResult(new AuthenticationState(authenticatedUser));
-        NotifyAuthenticationStateChanged(authState);
+        NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
     }
 
     public void MarkUserAsLoggedOut()
@@ -49,61 +42,61 @@ public class ApplicationStateProvider(ILocalStorageService localStorageService, 
     }
 
     #region Helpers
-    // private IEnumerable<Claim> GetClaimsFromJwt(string jwt)
-    // {
-    //     var handler = new JwtSecurityTokenHandler();
-    //     var jwtToken = handler.ReadJwtToken(jwt);
-    //     foreach (var claim in jwtToken.Claims)
-    //     {
-    //         Console.WriteLine($"Claim: {claim.Value}");
-    //     }
-    //     return jwtToken.Claims;        
-    // }
-
     private IEnumerable<Claim> GetClaimsFromJwt(string jwt)
     {
-        var claims = new List<Claim>();
-        var payload = jwt.Split('.')[1];
-        var jsonBytes = ParseBase64WithoutPadding(payload);
-        var keyValuePairs = JsonSerializer.Deserialize<Dictionary<string, object>>(jsonBytes);
-        if (keyValuePairs != null)
+        var handler = new JwtSecurityTokenHandler();
+        var jwtToken = handler.ReadJwtToken(jwt);
+        foreach (var claim in jwtToken.Claims)
         {
-            keyValuePairs.TryGetValue(ClaimTypes.Role, out var roles);
-
-            if (roles != null)
-            {
-                if (roles.ToString()!.Trim().StartsWith('[')) // we have an array
-                {
-                    var parsedRoles = JsonSerializer.Deserialize<string[]>(roles.ToString()!);
-                    claims.AddRange(parsedRoles!.Select(roleName => new Claim(ClaimTypes.Role, roleName)));
-                }
-                else // we have a single value
-                {
-                    claims.Add(new Claim(ClaimTypes.Role, roles.ToString()!));
-                }
-                keyValuePairs.Remove(ClaimTypes.Role);
-            }
-
-            keyValuePairs.TryGetValue(ClaimConstants.Permission, out var permissions);
-
-            if (permissions != null)
-            {
-                if (permissions.ToString()!.Trim().StartsWith('['))
-                {
-                    var parssedPermissions = JsonSerializer.Deserialize<string[]>(permissions.ToString()!);
-                    claims.AddRange(parssedPermissions!.Select(permissionName => new Claim(ClaimConstants.Permission, permissionName)));
-                }
-                else
-                {
-                    claims.Add(new Claim(ClaimConstants.Permission, permissions.ToString()!));
-                }
-                keyValuePairs.Remove(ClaimConstants.Permission);
-            }
-
-            claims.AddRange(keyValuePairs.Select(kvp => new Claim(kvp.Key, kvp.Value.ToString()!)));
+            Console.WriteLine($"Claim: {claim.Value}");
         }
-        return claims;
+        return jwtToken.Claims;        
     }
+
+    // private IEnumerable<Claim> GetClaimsFromJwt(string jwt)
+    // {
+    //     var claims = new List<Claim>();
+    //     var payload = jwt.Split('.')[1];
+    //     var jsonBytes = ParseBase64WithoutPadding(payload);
+    //     var keyValuePairs = JsonSerializer.Deserialize<Dictionary<string, object>>(jsonBytes);
+    //     if (keyValuePairs != null)
+    //     {
+    //         keyValuePairs.TryGetValue(ClaimTypes.Role, out var roles);
+
+    //         if (roles != null)
+    //         {
+    //             if (roles.ToString()!.Trim().StartsWith('[')) // we have an array
+    //             {
+    //                 var parsedRoles = JsonSerializer.Deserialize<string[]>(roles.ToString()!);
+    //                 claims.AddRange(parsedRoles!.Select(roleName => new Claim(ClaimTypes.Role, roleName)));
+    //             }
+    //             else // we have a single value
+    //             {
+    //                 claims.Add(new Claim(ClaimTypes.Role, roles.ToString()!));
+    //             }
+    //             keyValuePairs.Remove(ClaimTypes.Role);
+    //         }
+
+    //         keyValuePairs.TryGetValue(ClaimConstants.Permission, out var permissions);
+
+    //         if (permissions != null)
+    //         {
+    //             if (permissions.ToString()!.Trim().StartsWith('['))
+    //             {
+    //                 var parssedPermissions = JsonSerializer.Deserialize<string[]>(permissions.ToString()!);
+    //                 claims.AddRange(parssedPermissions!.Select(permissionName => new Claim(ClaimConstants.Permission, permissionName)));
+    //             }
+    //             else
+    //             {
+    //                 claims.Add(new Claim(ClaimConstants.Permission, permissions.ToString()!));
+    //             }
+    //             keyValuePairs.Remove(ClaimConstants.Permission);
+    //         }
+
+    //         claims.AddRange(keyValuePairs.Select(kvp => new Claim(kvp.Key, kvp.Value.ToString()!)));
+    //     }
+    //     return claims;
+    // }
 
     private byte[] ParseBase64WithoutPadding(string base64Payload)
     {
