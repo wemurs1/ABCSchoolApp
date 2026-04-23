@@ -1,5 +1,7 @@
 ﻿@page "/tenants"
 
+@attribute [ShouldHavePermission(SchoolAction.Read, SchoolFeature.Tenants)]
+
 <Header OnReturn="ReturnClicked" Title="Tenants" Description="Manage Tenants" />
 
 <MudTable Items="TenantList" Loading="_isLoading" LoadingProgressColor="Color.Info" Elevation="25">
