@@ -18,6 +18,10 @@ public class UserEndpoints
 {
     public required string Update { get; set; }
     public required string ResetPassword { get; set; }
+    public required string All { get; set; }
+    public required string ById { get; set; }
+
+    public string GetById(string userId) => $"{ById}{userId}";
 }
 
 public class TenantsEndpoints
@@ -29,18 +33,9 @@ public class TenantsEndpoints
     public required string Activate { get; set; }
     public required string Deactivate { get; set; }
 
-    public string GetById(string tenantId)
-    {
-        return $"{ById}{tenantId}";
-    }
+    public string GetById(string tenantId) => $"{ById}{tenantId}";
 
-    public string FullActivate(string tenantId)
-    {
-        return $"{Activate}{tenantId}/activate";
-    }
+    public string FullActivate(string tenantId) => $"{Activate}{tenantId}/activate";
 
-    public string FullDeactvate(string tenantId)
-    {
-        return $"{Deactivate}{tenantId}/deactivate";
-    }
+    public string FullDeactivate(string tenantId) => $"{Deactivate}{tenantId}/deactivate";
 }

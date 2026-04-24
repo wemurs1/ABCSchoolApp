@@ -23,7 +23,7 @@ public class TenantService(HttpClient httpClient, ApiSettings apiSettings) : ITe
 
     public async Task<IResponseWrapper<string>> DeActivateAsync(string tenantId)
     {
-        var response = await _httpClient.PutAsJsonAsync(_apiSettings.TenantsEndpoints.FullDeactvate(tenantId), tenantId);
+        var response = await _httpClient.PutAsJsonAsync(_apiSettings.TenantsEndpoints.FullDeactivate(tenantId), tenantId);
         var result = await response.WrapToResponse<string>() ?? throw new Exception("result is null");
         return result;
     }

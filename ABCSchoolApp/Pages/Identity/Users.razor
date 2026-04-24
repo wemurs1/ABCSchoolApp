@@ -1,0 +1,46 @@
+﻿@page "/users"
+
+@attribute [ShouldHavePermission(SchoolAction.Read, SchoolFeature.Users)]
+
+<Header OnReturn="Cancel" Title="Users" Description="Manage Users" />
+
+<MudTable Items="_userList" Loading="_isLoading" LoadingProgressColor="Color.Info" Elevation="25">
+    <ToolBarContent>
+        <MudFab StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" IconSize="Size.Medium" Class="mr-2" />
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>User Name</MudTh>
+        <MudTh>Firstname</MudTh>
+        <MudTh>Lastname</MudTh>
+        <MudTh>Phone Number</MudTh>
+        <MudTd>Active</MudTd>
+        <MudTd>Actions</MudTd>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd>@context.UserName</MudTd>
+        <MudTd>@context.FirstName</MudTd>
+        <MudTd>@context.LastName</MudTd>
+        <MudTd>@context.PhoneNumber</MudTd>
+        <MudTd>
+            <MudCheckBox @bind-Value="@context.IsActive" ReadOnly Color="Color.Secondary" />
+        </MudTd>
+        <MudTd>
+            <MudMenu Icon="@Icons.Material.Filled.MoreVert" Size="Size.Small" Color="Color.Secondary"
+                     TransformOrigin="Origin.BottomLeft" AnchorOrigin="Origin.BottomLeft">
+                <MudMenuItem>View Roles</MudMenuItem>
+                @if (context.IsActive)
+                {
+                    <MudMenuItem>Deactivate</MudMenuItem>
+                }
+                else
+                {
+                    <MudMenuItem>Activate</MudMenuItem>
+                }
+
+            </MudMenu>
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager RowsPerPageString="RowsPerPageString" InfoFormat="InfoFormat" />
+    </PagerContent>
+</MudTable>

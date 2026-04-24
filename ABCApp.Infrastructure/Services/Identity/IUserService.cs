@@ -1,7 +1,11 @@
+using ABCShared.Library.Models.Responses.Identity;
+
 namespace ABCApp.Infrastructure.Services.Identity;
 
 public interface IUserService
 {
     Task<IResponseWrapper<string>> UpdateUserAsync(UpdateUserRequest request);
     Task<IResponseWrapper<string>> ChangeUserPassword(ChangePasswordRequest request);
+    Task<IResponseWrapper<List<UserResponse>>> GetUsersAsync();
+    Task<IResponseWrapper<UserResponse>> GetByIdAsync(string userId);
 }

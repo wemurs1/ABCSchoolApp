@@ -9,11 +9,13 @@ public partial class NavMenu
     [Inject] protected IAuthorizationService AuthorizationService { get; set; } = default!;
 
     private bool _canViewTenants = false;
+    private bool _canViewUsers = false;
 
     protected override async Task OnParametersSetAsync()
     {
         var user = (await AuthState).User;
 
         _canViewTenants = await AuthorizationService.HasPermissionAsync(user, SchoolFeature.Tenants, SchoolAction.Read);
+        _canViewUsers = await AuthorizationService.HasPermissionAsync(user, SchoolFeature.Users, SchoolAction.Read);
     }
 }
