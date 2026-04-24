@@ -20,6 +20,7 @@ public class UserEndpoints
     public required string ResetPassword { get; set; }
     public required string All { get; set; }
     public required string ById { get; set; }
+    public required string Register { get; set; }
 
     public string GetById(string userId) => $"{ById}{userId}";
 }

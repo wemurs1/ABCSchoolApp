@@ -8,4 +8,5 @@ public interface IUserService
     Task<IResponseWrapper<string>> ChangeUserPassword(ChangePasswordRequest request);
     Task<IResponseWrapper<List<UserResponse>>> GetUsersAsync();
     Task<IResponseWrapper<UserResponse>> GetByIdAsync(string userId);
+    Task<IResponseWrapper<string>> RegisterUserAsync(CreateUserRequest request);
 }

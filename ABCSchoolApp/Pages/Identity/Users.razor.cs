@@ -35,6 +35,26 @@ public partial class Users
         }
     }
 
+
+    private async Task InvokeUserRegistrationDialog()
+    {
+        var options = new DialogOptions
+        {
+            CloseButton = true,
+            MaxWidth = MaxWidth.Small,
+            BackdropClick = false,
+            FullWidth = true
+        };
+
+        var dialog = await _dialogService.ShowAsync<RegisterUser>(title: null, options: options);
+        var result = (await dialog.Result)!;
+        if (!result.Canceled)
+        {
+            await LoadUsersAsync();
+        }
+    }
+
+
     private void Cancel()
     {
         _navigation.NavigateTo("/");

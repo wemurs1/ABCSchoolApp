@@ -6,7 +6,8 @@
 
 <MudTable Items="_userList" Loading="_isLoading" LoadingProgressColor="Color.Info" Elevation="25">
     <ToolBarContent>
-        <MudFab StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" IconSize="Size.Medium" Class="mr-2" />
+        <MudFab OnClick="InvokeUserRegistrationDialog" StartIcon="@Icons.Material.Filled.Add" Size="Size.Small"
+                IconSize="Size.Medium" Class="mr-2" />
     </ToolBarContent>
     <HeaderContent>
         <MudTh>User Name</MudTh>
