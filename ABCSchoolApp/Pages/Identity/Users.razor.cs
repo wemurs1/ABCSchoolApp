@@ -54,6 +54,10 @@ public partial class Users
         }
     }
 
+    private void GoToRoles(string userId)
+    {
+        _navigation.NavigateTo($"/user-roles/{userId}");
+    }
 
     private void Cancel()
     {

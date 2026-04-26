@@ -21,8 +21,12 @@ public class UserEndpoints
     public required string All { get; set; }
     public required string ById { get; set; }
     public required string Register { get; set; }
+    public required string RolesById { get; set; }
+    public required string UpdateRoles { get; set; }
 
     public string GetById(string userId) => $"{ById}{userId}";
+    public string GetRolesById(string userId) => $"{RolesById}{userId}";
+    public string UpdateRolesById(string userId)=>$"{UpdateRoles}{userId}";
 }
 
 public class TenantsEndpoints

@@ -7,6 +7,7 @@ global using ABCShared.Library.Constants;
 global using ABCShared.Library.Models.Requests.Identity;
 global using ABCShared.Library.Models.Requests.Tenancy;
 global using ABCShared.Library.Models.Requests.Token;
+global using ABCShared.Library.Models.Responses.Identity;
 global using ABCShared.Library.Models.Responses.Tenancy;
 global using ABCShared.Library.Models.Responses.Token;
 global using ABCShared.Library.Wrappers;

@@ -6,7 +6,7 @@
 
 <MudTable Items="_userList" Loading="_isLoading" LoadingProgressColor="Color.Info" Elevation="25">
     <ToolBarContent>
-        <MudFab OnClick="InvokeUserRegistrationDialog" StartIcon="@Icons.Material.Filled.Add" Size="Size.Small"
+        <MudFab StartIcon="@Icons.Material.Filled.Add" OnClick="InvokeUserRegistrationDialog" Size="Size.Small"
                 IconSize="Size.Medium" Class="mr-2" />
     </ToolBarContent>
     <HeaderContent>
@@ -28,7 +28,7 @@
         <MudTd>
             <MudMenu Icon="@Icons.Material.Filled.MoreVert" Size="Size.Small" Color="Color.Secondary"
                      TransformOrigin="Origin.BottomLeft" AnchorOrigin="Origin.BottomLeft">
-                <MudMenuItem>View Roles</MudMenuItem>
+                <MudMenuItem OnClick="@(() => GoToRoles(context.Id))">View Roles</MudMenuItem>
                 @if (context.IsActive)
                 {
                     <MudMenuItem>Deactivate</MudMenuItem>
@@ -37,7 +37,6 @@
                 {
                     <MudMenuItem>Activate</MudMenuItem>
                 }
-
             </MudMenu>
         </MudTd>
     </RowTemplate>
