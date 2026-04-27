@@ -1,4 +1,3 @@
-using ABCShared.Library.Models.Responses.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Authorization;
 
@@ -15,6 +14,9 @@ public partial class Users
 
     protected override async Task OnInitializedAsync()
     {
+        var user = (await AuthState).User;
+        _canCreateUsers = await AuthorizationService.HasPermissionAsync(user, SchoolFeature.Users, SchoolAction.Create);
+        _canViewRoles = await AuthorizationService.HasPermissionAsync(user, SchoolFeature.UserRoles, SchoolAction.Read);
         await LoadUsersAsync();
         _isLoading = false;
     }
