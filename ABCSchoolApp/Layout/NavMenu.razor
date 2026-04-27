@@ -6,6 +6,10 @@
     {
         <MudNavLink Href="/users" Icon="@Icons.Material.Filled.People">Users</MudNavLink>
     }
+    @if (_canViewRoles)
+    {
+        <MudNavLink Href="/roles" Icon="@Icons.Material.Filled.Security">Roles</MudNavLink>
+    }
     @if (_canViewTenants)
     {
         <MudNavLink Href="/tenants" Icon="@Icons.Material.Filled.School">Tenants</MudNavLink>

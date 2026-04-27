@@ -1,0 +1,28 @@
+﻿<MudForm Model="CreateRoleRequest" @ref="_form">
+    <MudDialog>
+        <TitleContent>
+            <MudText>
+                <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                Register New Role
+            </MudText>
+        </TitleContent>
+        <DialogContent>
+            <MudGrid>
+                <MudItem xs="12" md="6">
+                    <MudTextField @bind-Value="CreateRoleRequest.Name" Variant="Variant.Outlined" Label="Role Name"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField @bind-Value="CreateRoleRequest.Description" Variant="Variant.Outlined"
+                                  Label="Description" Margin="Margin.Dense" />
+                </MudItem>
+            </MudGrid>
+        </DialogContent>
+        <DialogActions>
+            <MudButton OnClick="CancelDialog" Variant="Variant.Outlined" Class="mr-auto">Cancel</MudButton>
+            <MudButton OnClick="SubmitCreateRoleAsync" Variant="Variant.Outlined" Color="Color.Primary">
+                Register
+            </MudButton>
+        </DialogActions>
+    </MudDialog>
+</MudForm>

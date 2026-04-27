@@ -1,0 +1,44 @@
+﻿@page "/roles"
+
+@attribute [ShouldHavePermission(SchoolAction.Read, SchoolFeature.Roles)]
+
+<Header OnReturn="Cancel" Title="Roles" Description="Manage Roles" />
+
+<MudTable Items="_roleList" Loading="_isLoading" LoadingProgressColor="Color.Info" Elevation="25">
+    <ToolBarContent>
+        @if (_canCreateroles)
+        {
+            <MudFab OnClick="InvokeCreateRoleDialog" StartIcon="@Icons.Material.Filled.Add" Size="Size.Small"
+                    IconSize="Size.Medium" Class="mr-2" />
+        }
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Name</MudTh>
+        <MudTh>Description</MudTh>
+        <MudTd>Actions</MudTd>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+        <MudTd DataLabel="Description">@context.Description</MudTd>
+        <MudTd DataLabel="Actions">
+            <MudMenu Icon="@Icons.Material.Filled.MoreVert" Size="Size.Small" Color="Color.Secondary"
+                     TransformOrigin="Origin.BottomLeft" AnchorOrigin="Origin.BottomLeft">
+                @if (_canViewRolePermissions)
+                {
+                    <MudMenuItem>View Permissions</MudMenuItem>
+                }
+                @if (_canUpdateRoles)
+                {
+                    <MudMenuItem OnClick="() => InvokeUpdateRole(context)">Update</MudMenuItem>
+                }
+                @if (_canDeleteRoles)
+                {
+                    <MudMenuItem OnClick="() => DeleteRoleAsync(context)">Delete</MudMenuItem>
+                }
+            </MudMenu>
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager RowsPerPageString="RowsPerPageString" InfoFormat="InfoFormat" />
+    </PagerContent>
+</MudTable>

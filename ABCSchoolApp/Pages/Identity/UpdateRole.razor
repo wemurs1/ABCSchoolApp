@@ -1,0 +1,19 @@
+﻿@page "/update-role/{RoleId}"
+
+@attribute [ShouldHavePermission(SchoolAction.Update, SchoolFeature.Roles)]
+
+<Header OnReturn="Cancel" Title="Roles" Description="Update Role" />
+
+
+<MudGrid>
+    <MudItem xs="12" md="6">
+        <MudTextField @bind-Value="@_roleResponse.Name" Variant="Variant.Outlined" Label="Role Name" />
+    </MudItem>
+    <MudItem xs="12" md="6">
+        <MudTextField @bind-Value="@_roleResponse.Description" Variant="Variant.Outlined" Label="Description" />
+    </MudItem>
+</MudGrid>
+<MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" Class="ml-auto"
+           OnClick="UpdateRoleDetailsAsync">
+    Save&nbsp;Changes
+</MudButton>

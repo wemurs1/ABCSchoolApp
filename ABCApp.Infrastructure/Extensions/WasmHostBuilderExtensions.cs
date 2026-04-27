@@ -32,6 +32,7 @@ public static class WasmHostBuilderExtensions
             .AddTransient<AuthenticationHeaderHandler>()
             .AddScoped<ITokenService, TokenService>()
             .AddScoped<IUserService, UserService>()
+            .AddScoped<IRoleService, RoleService>()
             .AddScoped<ITenantService, TenantService>()
             .AddScoped(sp => sp
                 .GetRequiredService<IHttpClientFactory>()
