@@ -23,6 +23,7 @@ public class UserEndpoints
     public required string Register { get; set; }
     public required string RolesById { get; set; }
     public required string UpdateRoles { get; set; }
+    public required string UpdateStatus { get; set; }
 
     public string GetById(string userId) => $"{ById}{userId}";
     public string GetRolesById(string userId) => $"{RolesById}{userId}";

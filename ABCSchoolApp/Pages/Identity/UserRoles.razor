@@ -5,8 +5,14 @@
 <Header OnReturn="Cancel" Title="@_title" Description="@_description" />
 
 <MudTable Items="_userRoleList" Loading="_isLoading" LoadingProgressColor="Color.Info" Elevation="25">
+   
     <ToolBarContent>
-         <MudButton OnClick="UpdateUserRolesAsync" Variant="Variant.Filled" Color="Color.Primary">Update User Roles</MudButton>
+        @if (_canUpdateUserRoles)
+        {
+            <MudButton OnClick="UpdateUserRolesAsync" Variant="Variant.Filled" Color="Color.Primary">
+                Update User Roles
+            </MudButton>
+        }
     </ToolBarContent>
     <HeaderContent>
         <MudTh>Name</MudTh>
@@ -17,7 +23,7 @@
         <MudTd>@context.Name</MudTd>
         <MudTd>@context.Description</MudTd>
         <MudTd>
-            <MudCheckBox @bind-Value="@context.IsAssigned" Color="Color.Secondary" />
+            <MudCheckBox Disabled="@(!_canUpdateUserRoles)" @bind-Value="@context.IsAssigned" Color="Color.Secondary" />
         </MudTd>
     </RowTemplate>
     <PagerContent>

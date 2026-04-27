@@ -31,11 +31,11 @@
                 <MudMenuItem OnClick="@(() => GoToRoles(context.Id))">View Roles</MudMenuItem>
                 @if (context.IsActive)
                 {
-                    <MudMenuItem>Deactivate</MudMenuItem>
+                    <MudMenuItem OnClick="()=>ActivateOrDeactivativeAsync(context)">Deactivate</MudMenuItem>
                 }
                 else
                 {
-                    <MudMenuItem>Activate</MudMenuItem>
+                    <MudMenuItem OnClick="()=>ActivateOrDeactivativeAsync(context)">Activate</MudMenuItem>
                 }
             </MudMenu>
         </MudTd>

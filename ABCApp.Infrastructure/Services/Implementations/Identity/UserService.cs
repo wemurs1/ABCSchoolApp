@@ -14,6 +14,13 @@ public class UserService(HttpClient httpClient, ApiSettings apiSettings) : IUser
         return result;
     }
 
+    public async Task<IResponseWrapper<string>> ChangeUserStatusASync(ChangeUserStatusRequest request)
+    {
+        var response = await _httpClient.PutAsJsonAsync(_apiSettings.UserEndpoints.UpdateStatus, request);
+        var result = await response.WrapToResponse<string>() ?? throw new Exception("result is null");
+        return result;
+    }
+
     public async Task<IResponseWrapper<UserResponse>> GetByIdAsync(string userId)
     {
         var response = await _httpClient.GetAsync(_apiSettings.UserEndpoints.GetById(userId));

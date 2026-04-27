@@ -59,6 +59,92 @@ public partial class Users
         _navigation.NavigateTo($"/user-roles/{userId}");
     }
 
+    private async Task ActivateOrDeactivativeAsync(UserResponse user)
+    {
+        if (user.IsActive)
+        {
+            // Deactivate
+            var parameters = new DialogParameters
+                {
+                    { nameof(Confirmation.Title), "Deactivate User" },
+                    { nameof(Confirmation.Message), $"Are you sure you want to Deactivate user: {user.FirstName} {user.LastName}?" },
+                    { nameof(Confirmation.ButtonText), "Deactivate" },
+                    {nameof(Confirmation.Color), Color.Error },
+                    {nameof(Confirmation.InputIcon), Icons.Material.Filled.Person }
+                };
+
+            var options = new DialogOptions
+            {
+                CloseButton = true,
+                MaxWidth = MaxWidth.Small,
+                BackdropClick = true,
+                FullWidth = true
+            };
+
+            var dialog = await _dialogService.ShowAsync<Confirmation>(title: null, parameters, options);
+            var result = await dialog.Result ?? throw new Exception("result is null");
+            if (!result.Canceled)
+            {
+                var response = await _userService.ChangeUserStatusASync(new ChangeUserStatusRequest { UserId = user.Id, Activation = false });
+
+                if (response.IsSuccessful)
+                {
+                    _snackbar.Add(response.Messages[0], Severity.Success);
+
+                    await LoadUsersAsync();
+                }
+                else
+                {
+                    foreach (var message in response.Messages)
+                    {
+                        _snackbar.Add(message, Severity.Error);
+                    }
+                }
+            }
+        }
+        else
+        {
+            // Activate
+            var parameters = new DialogParameters
+                {
+                    { nameof(Confirmation.Title), "Activate User" },
+                    { nameof(Confirmation.Message), $"Are you sure you want to activate user: {user.FirstName} {user.LastName}?" },
+                    { nameof(Confirmation.ButtonText), "Activate" },
+                    {nameof(Confirmation.Color), Color.Primary },
+                    {nameof(Confirmation.InputIcon), Icons.Material.Filled.Person }
+                };
+
+            var options = new DialogOptions
+            {
+                CloseButton = true,
+                MaxWidth = MaxWidth.Small,
+                BackdropClick = true,
+                FullWidth = true
+            };
+
+            var dialog = await _dialogService.ShowAsync<Confirmation>(title: null, parameters, options);
+            var result = await dialog.Result ?? throw new Exception("result is null");
+            if (!result.Canceled)
+            {
+                var response = await _userService.ChangeUserStatusASync(new ChangeUserStatusRequest { UserId = user.Id, Activation = true });
+
+                if (response.IsSuccessful)
+                {
+                    _snackbar.Add(response.Messages[0], Severity.Success);
+
+                    await LoadUsersAsync();
+                }
+                else
+                {
+                    foreach (var message in response.Messages)
+                    {
+                        _snackbar.Add(message, Severity.Error);
+                    }
+                }
+            }
+        }
+    }
+
     private void Cancel()
     {
         _navigation.NavigateTo("/");

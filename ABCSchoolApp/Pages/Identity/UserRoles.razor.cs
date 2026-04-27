@@ -28,6 +28,8 @@ public partial class UserRoles
 
     protected override async Task OnInitializedAsync()
     {
+        var user = (await AuthenticationState).User;
+        _canUpdateUserRoles = await AuthorizationService.HasPermissionAsync(user, SchoolFeature.UserRoles, SchoolAction.Update);
         await GetUserByIdAsync();
         await GetUserRolesAsync();
         _isLoading = false;
