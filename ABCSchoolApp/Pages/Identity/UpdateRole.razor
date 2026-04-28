@@ -5,6 +5,11 @@
 <Header OnReturn="Cancel" Title="Roles" Description="Update Role" />
 
 
+<MudButton Variant="Variant.Filled" Color="Color.Primary"  Size="Size.Small" Class="ml-auto mb-2"
+           OnClick="UpdateRoleDetailsAsync">
+    Save&nbsp;Changes
+</MudButton>
+
 <MudGrid>
     <MudItem xs="12" md="6">
         <MudTextField @bind-Value="@_roleResponse.Name" Variant="Variant.Outlined" Label="Role Name" />
@@ -13,7 +18,3 @@
         <MudTextField @bind-Value="@_roleResponse.Description" Variant="Variant.Outlined" Label="Description" />
     </MudItem>
 </MudGrid>
-<MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" Class="ml-auto"
-           OnClick="UpdateRoleDetailsAsync">
-    Save&nbsp;Changes
-</MudButton>

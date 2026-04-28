@@ -9,13 +9,11 @@ public partial class UpdateRole
         Id = string.Empty,
         Name = string.Empty,
         Description = string.Empty
-    };
-    private bool _isLoading = true;
+    };    
 
     protected override async Task OnInitializedAsync()
     {
         await LoadRoleAsync();
-        _isLoading = false;
     }
 
     private async Task LoadRoleAsync()
