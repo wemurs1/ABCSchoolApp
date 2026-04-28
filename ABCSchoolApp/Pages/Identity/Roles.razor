@@ -25,7 +25,7 @@
                      TransformOrigin="Origin.BottomLeft" AnchorOrigin="Origin.BottomLeft">
                 @if (_canViewRolePermissions)
                 {
-                    <MudMenuItem>View Permissions</MudMenuItem>
+                    <MudMenuItem OnClick="()=>ViewPermissions(context.Id)">View Permissions</MudMenuItem>
                 }
                 @if (_canUpdateRoles)
                 {
