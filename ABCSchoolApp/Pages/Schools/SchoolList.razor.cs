@@ -45,6 +45,23 @@ public partial class SchoolList
         }
     }
 
+    private async Task OnBoardNewSchoolAsync()
+    {
+        var options = new DialogOptions
+        {
+            CloseButton = true,
+            MaxWidth = MaxWidth.Small,
+            FullWidth = true,
+            BackdropClick = false
+        };
+        var dialog = await _dialogService.ShowAsync<CreateSchool>("Onboard New School", options);
+        var result = await dialog.Result ?? throw new Exception("result is null");
+        if (!result.Canceled)
+        {
+            await LoadSchoolsAsync();
+        }
+    }
+
     private void Cancel()
     {
         _navigation.NavigateTo("/");

@@ -8,18 +8,18 @@
     <ToolBarContent>
         @if (_canCreateSchools)
         {
-            <MudFab StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" IconSize="Size.Medium" Class="mr-2" />
+            <MudFab OnClick="OnBoardNewSchoolAsync" StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" IconSize="Size.Medium" Class="mr-2" />
         }
     </ToolBarContent>
     <HeaderContent>
         <MudTh>Name</MudTh>
         <MudTh>Established Date</MudTh>
-        <MudTd>Actions</MudTd>
+        <MudTd Style="text-align:right">Actions</MudTd>
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="Name">@context.Name</MudTd>
-        <MudTd DataLabel="Established Date">@context.EstablishedDate</MudTd>
-        <MudTd DataLabel="Actions">
+        <MudTd DataLabel="Established Date">@context.EstablishedDate.ToString("dd MMM yyyy")</MudTd>
+        <MudTd Style="text-align:right" DataLabel="Actions">
             <MudMenu Icon="@Icons.Material.Filled.MoreVert" Size="Size.Small" Color="Color.Secondary"
                      TransformOrigin="Origin.BottomLeft" AnchorOrigin="Origin.BottomLeft">
                 @if (_canUpdateSchools)

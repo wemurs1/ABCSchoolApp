@@ -16,7 +16,7 @@
         <MudTh>Email</MudTh>
         <MudTh>Expiry Date</MudTh>
         <MudTh>Active</MudTh>
-        <MudTh>Actions</MudTh>
+        <MudTh Style="text-align:right">Actions</MudTh>
     </HeaderContent>
     <RowTemplate>
         <MudTd>@context.Name</MudTd>
@@ -27,7 +27,7 @@
         <MudTd>
             <MudCheckBox @bind-Value="@context.IsActive" ReadOnly Color="Color.Secondary" />
         </MudTd>
-        <MudTd>
+        <MudTd Style="text-align:right">
             <MudMenu Icon="@Icons.Material.Filled.MoreVert" Size="Size.Small" Color="Color.Secondary"
                      TransformOrigin="Origin.BottomLeft" AnchorOrigin="Origin.BottomLeft">
                 <MudMenuItem OnClick="@(() => UpgradeSubscriptionAsync(context))">Upgrade</MudMenuItem>

@@ -18,7 +18,7 @@
         <MudTh>Lastname</MudTh>
         <MudTh>Phone Number</MudTh>
         <MudTd>Active?</MudTd>
-        <MudTd>Actions</MudTd>
+        <MudTd Style="text-align:right">Actions</MudTd>
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="Username">@context.UserName</MudTd>
@@ -28,7 +28,7 @@
         <MudTd DataLabel="Active?">
             <MudCheckBox @bind-Value="@context.IsActive" ReadOnly Color="Color.Secondary" />
         </MudTd>
-        <MudTd DataLabel="Actions">
+        <MudTd Style="text-align:right" DataLabel="Actions">
             <MudMenu Icon="@Icons.Material.Filled.MoreVert" Size="Size.Small" Color="Color.Secondary"
                      TransformOrigin="Origin.BottomLeft" AnchorOrigin="Origin.BottomLeft">
                 @if (_canViewRoles)

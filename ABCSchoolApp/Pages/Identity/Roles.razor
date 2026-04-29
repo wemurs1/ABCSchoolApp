@@ -15,12 +15,12 @@
     <HeaderContent>
         <MudTh>Name</MudTh>
         <MudTh>Description</MudTh>
-        <MudTd>Actions</MudTd>
+        <MudTd Style="text-align:right">Actions</MudTd>
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="Name">@context.Name</MudTd>
         <MudTd DataLabel="Description">@context.Description</MudTd>
-        <MudTd DataLabel="Actions">
+        <MudTd Style="text-align:right" DataLabel="Actions">
             <MudMenu Icon="@Icons.Material.Filled.MoreVert" Size="Size.Small" Color="Color.Secondary"
                      TransformOrigin="Origin.BottomLeft" AnchorOrigin="Origin.BottomLeft">
                 @if (_canViewRolePermissions)
