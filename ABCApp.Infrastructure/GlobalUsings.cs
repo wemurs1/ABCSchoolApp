@@ -2,6 +2,7 @@ global using ABCApp.Infrastructure.Constants;
 global using ABCApp.Infrastructure.Extensions;
 global using ABCApp.Infrastructure.Services.Auth;
 global using ABCApp.Infrastructure.Services.Identity;
+global using ABCApp.Infrastructure.Services.Schools;
 global using ABCApp.Infrastructure.Services.Tenancy;
 global using ABCShared.Library.Constants;
 global using ABCShared.Library.Models.Requests.Identity;

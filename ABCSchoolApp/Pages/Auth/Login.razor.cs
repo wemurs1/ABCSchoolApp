@@ -1,5 +1,3 @@
-using ABCApp.Infrastructure.Models;
-
 namespace ABCSchoolApp.Pages.Auth;
 
 public partial class Login

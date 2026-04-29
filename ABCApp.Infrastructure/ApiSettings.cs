@@ -7,6 +7,7 @@ public class ApiSettings
     public required UserEndpoints UserEndpoints { get; set; }
     public required TenantsEndpoints TenantsEndpoints { get; set; }
     public required RoleEndpoints RoleEndpoints { get; set; }
+    public required SchoolEndpoints SchoolEndpoints { get; set; }
 }
 
 public class TokenEndpoints
@@ -58,4 +59,18 @@ public class TenantsEndpoints
     public string GetById(string tenantId) => $"{ById}{tenantId}";
     public string FullActivate(string tenantId) => $"{Activate}{tenantId}/activate";
     public string FullDeactivate(string tenantId) => $"{Deactivate}{tenantId}/deactivate";
+}
+
+public class SchoolEndpoints
+{
+    public required string Create { get; set; }
+    public required string Update { get; set; }
+    public required string Delete { get; set; }
+    public required string ById { get; set; }
+    public required string ByName { get; set; }
+    public required string All { get; set; }
+
+    public string DeleteSchool(string schoolId) => $"{Delete}{schoolId}";
+    public string GetById(string schoolId) => $"{ById}{schoolId}";
+    public string GetByName(string schoolId) => $"{ByName}{schoolId}";
 }

@@ -2,6 +2,10 @@
 <MudNavMenu Rounded="true" Margin="Margin.Dense" Color="Color.Primary" Class="pa-2">
     <MudNavLink Match="NavLinkMatch.Prefix" Href="/" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
     <MudNavLink Href="/account" Icon="@Icons.Material.Filled.ManageAccounts">Account</MudNavLink>
+    @if (_canViewSchools)
+    {
+        <MudNavLink Href="/schools" Icon="@Icons.Material.Filled.School">Schools</MudNavLink>
+    }
     @if (_canViewUsers)
     {
         <MudNavLink Href="/users" Icon="@Icons.Material.Filled.People">Users</MudNavLink>
@@ -12,6 +16,6 @@
     }
     @if (_canViewTenants)
     {
-        <MudNavLink Href="/tenants" Icon="@Icons.Material.Filled.School">Tenants</MudNavLink>
+        <MudNavLink Href="/tenants" Icon="@Icons.Material.Filled.BusinessCenter">Tenants</MudNavLink>
     }
 </MudNavMenu>

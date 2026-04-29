@@ -1,5 +1,6 @@
 ﻿@using ABCApp.Infrastructure.Services.Auth
 @using ABCApp.Infrastructure.Services.Identity
+@using ABCApp.Infrastructure.Services.Schools
 @using ABCApp.Infrastructure.Services.Tenancy
 @using ABCSchoolApp
 @using ABCSchoolApp.Components
@@ -26,4 +27,5 @@
 @inject ITokenService _tokenService
 @inject IUserService _userService
 @inject IRoleService _roleService
+@inject ISchoolService _schoolService
 @inject NavigationManager _navigation
