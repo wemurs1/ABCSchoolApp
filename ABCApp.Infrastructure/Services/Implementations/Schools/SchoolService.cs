@@ -1,5 +1,4 @@
 using System.Net.Http.Json;
-using ABCShared.Library.Models.Requests.Schools;
 using ABCShared.Library.Models.Responses.Schools;
 
 namespace ABCApp.Infrastructure.Services.Implementations.Schools;

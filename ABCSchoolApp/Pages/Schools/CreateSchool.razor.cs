@@ -1,3 +1,5 @@
+using ABCApp.Infrastructure.Validators;
+
 namespace ABCSchoolApp.Pages.Schools;
 
 public partial class CreateSchool
@@ -7,11 +9,21 @@ public partial class CreateSchool
     private CreateSchoolRequest CreateSchoolRequest { get; set; } = new() { Name = string.Empty };
     private MudForm _form = default!;
     private MudDatePicker _datePicker = default!;
+    private CreateSchoolRequestValidator _validator = new();
 
     private DateTime? EstablishedDatePicker
     {
         get => CreateSchoolRequest.EstablishedDate == default ? null : CreateSchoolRequest.EstablishedDate;
         set { if (value.HasValue) CreateSchoolRequest.EstablishedDate = value.Value; }
+    }
+
+    private async Task SubmitAsync()
+    {
+        await _form.ValidateAsync();
+        if (_form.IsValid)
+        {
+            await SaveSchoolAsync();
+        }
     }
 
     private async Task SaveSchoolAsync()
