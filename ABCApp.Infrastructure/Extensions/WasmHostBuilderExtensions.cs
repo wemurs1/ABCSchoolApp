@@ -1,6 +1,3 @@
-using ABCApp.Infrastructure.Services.Implementations.Identity;
-using ABCApp.Infrastructure.Services.Implementations.Schools;
-using ABCApp.Infrastructure.Services.Implementations.Tenancy;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -36,6 +33,7 @@ public static class WasmHostBuilderExtensions
             .AddScoped<IRoleService, RoleService>()
             .AddScoped<ITenantService, TenantService>()
             .AddScoped<ISchoolService, SchoolService>()
+            .AddScoped<IHttpRefreshTokenInterceptorService, HttpRefreshTokenInterceptorService>()
             .AddScoped(sp => sp
                 .GetRequiredService<IHttpClientFactory>()
                 .CreateClient(_clientName)

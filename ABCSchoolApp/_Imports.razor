@@ -1,5 +1,6 @@
 ﻿@using ABCApp.Infrastructure.Services.Auth
 @using ABCApp.Infrastructure.Services.Identity
+@using ABCApp.Infrastructure.Services.Interceptors
 @using ABCApp.Infrastructure.Services.Schools
 @using ABCApp.Infrastructure.Services.Tenancy
 @using ABCSchoolApp
@@ -22,10 +23,11 @@
 
 @inject ApplicationStateProvider _applicationStateProvider
 @inject IDialogService _dialogService
+@inject IHttpRefreshTokenInterceptorService _interceptor
+@inject IRoleService _roleService
+@inject ISchoolService _schoolService
 @inject ISnackbar _snackbar
 @inject ITenantService _tenantService
 @inject ITokenService _tokenService
 @inject IUserService _userService
-@inject IRoleService _roleService
-@inject ISchoolService _schoolService
 @inject NavigationManager _navigation

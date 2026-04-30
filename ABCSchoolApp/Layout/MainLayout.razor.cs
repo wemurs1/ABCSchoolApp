@@ -4,6 +4,12 @@ public partial class MainLayout
 {
     private bool _drawerOpen = true;
 
+    protected override void OnInitialized()
+    {
+        _interceptor.RegisterEvent();
+        StateHasChanged();
+    }
+
     private void ToggleDrawer()
     {
         _drawerOpen = !_drawerOpen;

@@ -28,13 +28,7 @@ public class TokenService(
         var result = await response.WrapToResponse<TokenResponse>() ?? throw new Exception("No result from login request");
         if (result.IsSuccessful)
         {
-            var token = result.Data.Jwt;
-            var refreshToken = result.Data.RefreshToken;
-            await _localStorageService.SetItemAsync(StorageConstants.AuthToken, token);
-            await _localStorageService.SetItemAsync(StorageConstants.RefreshToken, refreshToken);
-            ((ApplicationStateProvider)_authenticationStateProvider).MarkUserAsAuthenticated();
-
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            await UpdateUserState(result.Data);
             return ResponseWrapper.Success();
         }
         else
@@ -50,6 +44,68 @@ public class TokenService(
         ((ApplicationStateProvider)_authenticationStateProvider).MarkUserAsLoggedOut();
         _httpClient.DefaultRequestHeaders.Authorization = null;
         return ResponseWrapper.Success();
+    }
+
+    public async Task<string> RefreshTokenAsync()
+    {
+        var currentJwt = await _localStorageService.GetItemAsync<string>(StorageConstants.AuthToken);
+        var currentRefreshToken = await _localStorageService.GetItemAsync<string>(StorageConstants.RefreshToken);
+        var request = new RefreshTokenRequest
+        {
+            CurrentJwt = currentJwt,
+            CurrentRefreshToken = currentRefreshToken
+        };
+        var response = await _httpClient.PostAsJsonAsync(_apiSettings.TokenEndpoints.RefreshToken, request);
+        var result = await response.WrapToResponse<TokenResponse>() ?? throw new Exception("Result is null");
+        if (result.IsSuccessful)
+        {
+            await UpdateUserState(result.Data);
+            return currentJwt;
+        }
+        else
+        {
+            throw new ApplicationException(result.Messages[0]);
+        }
+    }
+
+    public async Task<string> ForceTryRefreshTokenAsync()
+    {
+        var currentRefreshToken = await _localStorageService.GetItemAsync<string>(StorageConstants.RefreshToken);
+        if (string.IsNullOrEmpty(currentRefreshToken)) return string.Empty;
+
+        var authState = await _authenticationStateProvider.GetAuthenticationStateAsync();
+
+        var user = authState.User;
+        var exp = user.FindFirst(c => c.Type.Equals("exp"))?.Value;
+        var expTime = DateTimeOffset.FromUnixTimeSeconds(Convert.ToInt64(exp));
+        var currentTime = DateTime.UtcNow;
+
+        var diff = expTime - currentTime;
+
+        // Only within last five minutes to expiry
+        if (diff.TotalMinutes <= 5)
+        {
+            if (diff.TotalMinutes < 0)
+            {
+                await LogoutAsync();
+            }
+            else
+            {
+                return await RefreshTokenAsync();
+            }
+        }
+        return string.Empty;
+    }
+
+    private async Task UpdateUserState(TokenResponse response)
+    {
+        var token = response.Jwt;
+        var refreshToken = response.RefreshToken;
+        await _localStorageService.SetItemAsync(StorageConstants.AuthToken, token);
+        await _localStorageService.SetItemAsync(StorageConstants.RefreshToken, refreshToken);
+        ((ApplicationStateProvider)_authenticationStateProvider).MarkUserAsAuthenticated();
+
+        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
     }
 
     private static void AddTenantHeader(HttpRequestMessage request, string headerName, string headerValue)
